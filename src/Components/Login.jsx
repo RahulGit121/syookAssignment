@@ -7,6 +7,8 @@ const Login = () => {
   const [username, setUsername] =useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLogin, setIsLogin] = useState('false');
+
   const navigate = useNavigate();
 
   const handleLogin = (e)=>{
@@ -18,7 +20,7 @@ const Login = () => {
       alert('Login Successful');
       setError('');
       navigate('/')
-
+      setIsLogin =true;
     }
     else{
       setError('Invalid username or password');
