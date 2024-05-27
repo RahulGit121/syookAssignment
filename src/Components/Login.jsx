@@ -1,26 +1,28 @@
 import React, { useState } from 'react'
 import users from '../user.json';
 import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
 
 const Login = () => {
 
-  const [username, setUsername] =useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [isLogin, setIsLogin] = useState('false');
+  const [isLogin, setIsLogin] = useState(false);
 
   const navigate = useNavigate();
 
   const handleLogin = (e)=>{
     e.preventDefault();
 
-    const user = users.find((u) => u.username===username && u.password ===password);
+    let user = users.find((u) => u.username===username && u.password ===password);
 
     if(user){
+      
       alert('Login Successful');
       setError('');
-      navigate('/')
-      setIsLogin =true;
+      navigate('/');
+      setIsLogin(true);
     }
     else{
       setError('Invalid username or password');
@@ -28,8 +30,13 @@ const Login = () => {
 
   };
 
+  const handleLogout =() =>{
+    setIsLogin(false);
+  } 
+
   return (
     <>
+    <Navbar isLogin={isLogin} handleLogout={handleLogout} ></Navbar>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         
